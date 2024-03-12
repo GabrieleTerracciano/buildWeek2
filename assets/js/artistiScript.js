@@ -77,3 +77,6 @@ const cover =  album.cover_medium;
      albumArtist.appendChild(div);
     }
 };
+
+
+

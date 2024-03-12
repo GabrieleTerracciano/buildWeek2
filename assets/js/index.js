@@ -40,3 +40,5 @@ async function getArtist() {
 		row.appendChild(div)
 	}
 };
+
+
