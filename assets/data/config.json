@@ -1,8 +1,10 @@
 {
+    "proxy": "https://cors-anywhere.herokuapp.com/",
     "options": {
         "headers": {
             "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-            "X-RapidAPI-Key": "c509d4948cmsh9aac42c276c130ep19f8a1jsn3b39e16794e9"
+            "X-RapidAPI-Key": "b2a4471827mshbf41dbeb51d9ca5p1dce9ejsn5eaeb2e9b73a"
+            
         }
     },
     "fetchs": {
