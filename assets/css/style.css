@@ -45,3 +45,19 @@ cursor: pointer;
 .bg-generale {
     background-color: #181818;
 }
+
+.card{
+text-decoration: none;    
+}
+
+.col-2 a {
+    text-decoration: none!important;
+}
+
+
+
+/*.......CSS pag artista*/
+
+.artisti{
+
+}

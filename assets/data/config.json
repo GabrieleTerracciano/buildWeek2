@@ -1,5 +1,13 @@
 {
-    "clientId": "c509d4948cmsh9aac42c276c130ep19f8a1jsn3b39e16794e9",
+    "options": {
+        "headers": {
+            "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+            "X-RapidAPI-Key": "c509d4948cmsh9aac42c276c130ep19f8a1jsn3b39e16794e9"
+        }
+    },
+    "fetchs": {
+        "artist": "https://deezerdevs-deezer.p.rapidapi.com/artist/"
+    },
     "artist": {
         "5695": {
             "albums": [6439710, 508238241, 494071561, 413523537, 365267397, 256266732]
