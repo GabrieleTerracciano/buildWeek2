@@ -51,6 +51,7 @@ text-decoration: none;
 }
 
 .col-2 a {
+    width: 100%;
     text-decoration: none!important;
 }
 
@@ -210,6 +211,26 @@ text-decoration: none;
 .volume-bar .progress-bar:hover .progress::after{
     --size: .8em;
 }
+
+
+
+
+.border-bottom{
+    width: 100%;
+    background-color: #181818;
+position: sticky;
+top: 50px;
+z-index: 1000000;
+}
+
+.cerchio {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+    height: 30px;
+    width: 30px;
+}
+
 
 
 

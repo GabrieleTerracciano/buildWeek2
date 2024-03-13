@@ -10,9 +10,9 @@ const albumArtist = document.getElementById('album');
 
 const playPauseButton = document.querySelector(".play-pause");
 const progressBar = document.querySelector(".progress");
-const progressContainer = document.querySelector(".progress-container");
+const progressContainer = document.querySelector(".progress-container .progress-bar");
 const volumeProgressBar = document.querySelector(".volume-bar .progress");
-const volumeContainer = document.querySelector(".volume-bar");
+const volumeContainer = document.querySelector(".volume-bar .progress-bar");
 
 const cTime = document.getElementById('currentTime')
 const tTime = document.getElementById('totalTime')
