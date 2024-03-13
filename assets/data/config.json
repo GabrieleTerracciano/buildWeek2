@@ -1,5 +1,5 @@
 {
-    "proxy": "https://cors-anywhere.herokuapp.com/",
+    "proxy": "https://corsproxy.io/?",
     "options": {
         "headers": {
             "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",

@@ -22,7 +22,7 @@ const GET = async () => {
 
 async function getArtist() {
 	for (const [key, value] of Object.entries(config.artist)) {
-		let artista = await fetch(`${config.fetchs.artist}${key}`, config.options)
+		let artista = await fetch(`${config.proxy}${config.fetchs.artist}${key}`, config.options)
 		artista = await artista.json();
 
 		const div = document.createElement('div');
