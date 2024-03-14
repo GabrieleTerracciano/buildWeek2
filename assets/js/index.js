@@ -28,7 +28,6 @@ function togglePlayPause() {
         isPlaying = !isPlaying;
         updatePlayPauseIcon();
     }
-    return
 }
 
 // Funzione per aggiornare l'icona del pulsante play/pausa
