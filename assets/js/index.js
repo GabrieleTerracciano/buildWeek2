@@ -262,3 +262,52 @@ async function getLibrary() {
         })
     }
 };
+
+let ricerca = document.getElementById('ricerca');
+let container = document.getElementById('container');
+const valueRicerca = ricerca.value;
+
+
+const search = async () => {
+	try {
+		let jsonConfig = await fetch(`"https://corsproxy.io/?https://api.deezer.com/search?q=${valueRicerca}` ,{
+        method:'GET',
+		headers:{
+			"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+            "X-RapidAPI-Key": "b2a4471827mshbf41dbeb51d9ca5p1dce9ejsn5eaeb2e9b73a",
+            "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin"
+		}
+		});
+		jsonConfig = await jsonConfig.json();
+		config = jsonConfig;
+		const ricerca = {};
+		ricerca = config;
+		console.log(ricerca)
+	} catch (error) {
+		console.error(error);
+	}
+
+// 	const div = document.createElement('div');
+//  container.innerHTML = '';
+//  div.innerHTML = ``
+
+
+//  container.appendChild(div)
+};
+
+
+
+
+
+ricerca.addEventListener('keydown', function (e){
+if(e.key === 'Enter'){
+search();
+}
+});
+
+
+
+
+
+
+    
