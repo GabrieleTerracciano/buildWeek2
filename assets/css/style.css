@@ -50,7 +50,8 @@ cursor: pointer;
 text-decoration: none;    
 }
 
-.col-2 a {
+a {
+    color: inherit!important;
     width: 100%;
     text-decoration: none!important;
 }
@@ -75,7 +76,7 @@ text-decoration: none;
     align-items: center;
     position: relative;
 
-    height: 10vh;
+    height: 9vh;
     padding: var(--padding);
     color: var(--primary-color);
 }
@@ -212,7 +213,14 @@ text-decoration: none;
     --size: .8em;
 }
 
-
+#ricerca{
+    width: 350px;
+    height: 3.5vh;
+    border: solid 2px;
+    padding: 0;
+    border-radius: 30px;
+    font-weight:lighter;
+}
 
 
 .border-bottom{

@@ -75,14 +75,13 @@ async function GET() {
     const urlParametro = new URLSearchParams(search)
     id = urlParametro.get('id');
 
-    await getArtist()
-    getSongAlbum()
+    let albums = await getArtist()
+    getSongAlbum(albums)
 }
 
 function getDurata(time) {
     time = parseInt(time)
     const minuti = Math.floor(time / 60)
-    console.log(minuti)
     let secondi = time - (minuti * 60)
     if (secondi >= 0  && secondi < 10) {
         secondi = "0"+secondi
@@ -98,9 +97,17 @@ async function getArtist() {
     ascolti.innerText = artist.nb_fan;
     let tracklist = await fetch(config.proxy+artist.tracklist, config.options);
     tracklist = await tracklist.json();
-    for(i=0; i < 5; i++){
+    let count = 0;
+    let albums = {}
+    for(i=0; i < tracklist.data.length; i++){
+        if (count >= 5) {
+            break
+        }
+        count++
+        if (!albums[tracklist.data[i].album.id]) {
+            albums[tracklist.data[i].album.id] = true;
+        }
         const li = document.createElement('li')
-        console.log(tracklist.data[i])
         const div = document.createElement('div')
         div.setAttribute('data-preview', tracklist.data[i].preview)
         div.innerHTML = `
@@ -132,34 +139,31 @@ async function getArtist() {
             li.appendChild(div)
             topArtista.appendChild(li)
     };
+    return albums
 }
 
-async function getSongAlbum() {
-    let idMerda = id
-    for(i=0; i < config.artist[id].albums.length; i++){
-        let album = await fetch(config.proxy+config.fetchs.album+config.artist[idMerda].albums[i], config.options);
+async function getSongAlbum(albums) {
+    for (const [key,value] of Object.entries(albums)) {
+        let album = await fetch(config.proxy+config.fetchs.album+key, config.options);
         album = await album.json()
-const id = album.id;
-const title =  album.title;
-const cover =  album.cover_medium;
+        const id = album.id;
+        const title =  album.title;
+        const cover =  album.cover_medium;
 
 
-     const div = document.createElement('div');
-     div.classList.add('col-2')
-    
-     div.innerHTML = `<a href="album.html?id=${id}">
-     <div class="card bg-card" id="album-${id}">
-         <img src="${cover}" class="card-img-top p-3 m-auto" style="border-radius:20px" alt="${title}">
-         <div class="card-body">
-             <h6 class="card-title">${title}</h6>
-             <p class="card-text text-secondary">Artista</p>
-         </div>
-     </div>
- </a>`
-     
-     
-
-     albumArtist.appendChild(div);
+        const div = document.createElement('div');
+        div.classList.add('col-2')
+        
+        div.innerHTML = `<a href="album.html?id=${id}">
+            <div class="card bg-card" id="album-${id}">
+                <img src="${cover}" class="card-img-top p-3 m-auto" style="border-radius:20px" alt="${title}">
+                <div class="card-body">
+                    <h6 class="card-title">${title}</h6>
+                    <p class="card-text text-secondary">Artista</p>
+                </div>
+            </div>
+        </a>`
+        albumArtist.appendChild(div);
     }
 };
 

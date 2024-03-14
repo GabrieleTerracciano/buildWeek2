@@ -9,7 +9,8 @@
     },
     "fetchs": {
         "artist": "https://deezerdevs-deezer.p.rapidapi.com/artist/",
-        "album": "https://deezerdevs-deezer.p.rapidapi.com/album/"
+        "album": "https://deezerdevs-deezer.p.rapidapi.com/album/",
+        "search": "https://deezerdevs-deezer.p.rapidapi.com/search?q="
     },
     "artist": {
         "5695": {
@@ -30,5 +31,17 @@
         "105945362" : {
             "albums": [440939307, 413250787]
         }
+    },
+    "library": {
+        "705" : {
+            "albums": [77895022, 10506072, 5965734, 390984, 1248725, 339063]
+        },
+        "118046632" : {
+            "albums": [272514482, 302157987, 228257312, 268820122, 211418252, 195927362]
+        }
+    },
+    "home": {
+        "albums": [445994175, 13856706, 614608, 510894151, 557619402, 444647875],
+        "tracks": ["beethoven", "mozart", "chopin", "satie"]
     }
 }
