@@ -77,6 +77,7 @@ async function GET() {
 
     let albums = await getArtist()
     getSongAlbum(albums)
+    getLibrary();
 }
 
 function getDurata(time) {
@@ -164,6 +165,90 @@ async function getSongAlbum(albums) {
             </div>
         </a>`
         albumArtist.appendChild(div);
+    }
+};
+
+
+let libreria = document.getElementById('libreria');
+
+async function getLibrary() {
+    for (const [key, value] of Object.entries(config.library)) {
+		let artista = await fetch(`${config.proxy}${config.fetchs.artist}${key}`, config.options)
+		artista = await artista.json();
+		const div = document.createElement('div')
+        div.classList.add('row', 'py-2')
+        div.innerHTML = `
+        <div class="col-2">
+            <a href="artista.html?id=${key}">
+                <img
+                    src="${artista.picture_small}"
+                    class="img-fluid rounded-circle"
+                    alt="${artista.name}"
+                />
+            </a>
+        </div>
+        <div class="col-10">
+            <a href="artista.html?id=${key}">
+                <h6 id="nome">${artista.name}</h6>
+                <div>
+                    <span class="text-white opacity-50"
+                    >Artista</span
+                    >
+                </div>
+            </a>
+        </div>
+        `
+        libreria.appendChild(div)
+        value.albums.forEach(async (element) => {
+            let album = await fetch(`${config.proxy}${config.fetchs.album}${element}`, config.options)
+            album = await album.json();
+            const div2 = document.createElement('div')
+            div2.classList.add('row', 'py-2')
+            div2.innerHTML = `
+            <div class="col-2">
+                <a href="album.html?id=${element}">
+                <img
+                    src="${album.cover_small}"
+                    class="img-fluid rounded-2"
+                    alt="${album.title}"
+                />
+                </a>
+            </div>
+            <div class="col-10">
+                <a href="album.html?id=${element}">
+                <h6 id="nome">${album.title}</h6>
+                <div>
+                    <span class="text-white opacity-50"
+                    >Album &middot; ${album.artist.name}</span
+                    >
+                </div>
+                </a>
+            </div>
+            `
+            libreria.appendChild(div2)
+            album.tracks.data.forEach(async (element2) => {
+                const div3 = document.createElement('div')
+                div3.classList.add('row', 'py-2')
+                div3.innerHTML = `
+                <div class="col-2">
+                    <img
+                        src="${album.cover_small}"
+                        class="img-fluid rounded-2"
+                        alt="${element2.title}"
+                    />
+                </div>
+                <div class="col-10">
+                    <h6 id="nome">${element2.title}</h6>
+                    <div>
+                        <span class="text-white opacity-50"
+                        >Album &middot; ${album.title}</span
+                        >
+                    </div>
+                </div>
+                `
+                libreria.appendChild(div3)
+            })
+        })
     }
 };
 
