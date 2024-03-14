@@ -215,9 +215,8 @@ a {
 
 #ricerca{
     width: 350px;
-    height: 3.5vh;
-    border: solid 2px;
-    padding: 0;
+    height: 35px;
+    border: solid 2px white;
     border-radius: 30px;
     font-weight:lighter;
 }
