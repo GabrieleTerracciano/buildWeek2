@@ -1,4 +1,5 @@
 let config = {};
+let ricerca = document.getElementById("ricerca");
 
 // let contenitore = [];
 
@@ -95,14 +96,16 @@ const GET = async () => {
     let jsonConfig = await fetch("assets/data/config.json");
     jsonConfig = await jsonConfig.json();
     config = jsonConfig;
-    getArtist();
+    await getArtist();
     getAlbum();
     getTrack();
     getLibrary();
+    getParams();
   } catch (error) {
     console.error(error);
   }
 };
+
 
 async function getArtist() {
   for (const [key, value] of Object.entries(config.artist)) {
@@ -311,7 +314,6 @@ async function getLibrary() {
   }
 }
 
-let ricerca = document.getElementById("ricerca");
 let container = document.getElementById("container");
 
 const h2Artista = document.getElementById('h2Artista')
@@ -321,11 +323,11 @@ const h2Tracce = document.getElementById('h2Tracce')
 const contenitore = {};
 
 
-const search = async () => {
+async function search() {
   const valueRicerca = ricerca.value;
   try {
     const response = await fetch(
-      `https://corsproxy.io/?https://api.deezer.com/search?q=${valueRicerca}`,
+      `https://api.deezer.com/search?q=${valueRicerca}`,
       {
         method: "GET",
         headers: {
@@ -391,3 +393,13 @@ const searchBar = ricerca.addEventListener("keydown", function (e) {
     return search();
   }
 });
+
+async function getParams(){
+  const link = window.location.search;
+  const urlParametro = new URLSearchParams(link)
+  let risultato = urlParametro.get('risultato');
+  if(risultato){
+  ricerca.value = risultato;
+  search();
+  }
+  }

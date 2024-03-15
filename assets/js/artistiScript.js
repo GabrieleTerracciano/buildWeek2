@@ -254,3 +254,86 @@ async function getLibrary() {
 
 
 
+let ricerca = document.getElementById("ricerca");
+
+
+const h2Artista = document.getElementById('h2Artista')
+const h2Album = document.getElementById('h2Album')
+const h2Tracce = document.getElementById('h2Tracce')
+
+const contenitore = {};
+
+
+const search = async () => {
+  const valueRicerca = ricerca.value;
+  try {
+    const response = await fetch(
+      `https://api.deezer.com/search?q=${valueRicerca}`,
+      {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "795a258612mshd9818e547d03173p17e25bjsn04018e5e81ed",
+          "Access-Control-Allow-Headers":
+            "X-Requested-With, Content-Type, Accept, Origin",
+        },
+      }
+    );
+    let risposta = await response.json();
+    if (risposta) {
+        //Svuoto elmenti che non mi servono
+        h2Artista.innerText = '';
+        h2Tracce.innerText = '';
+        rowArtist.innerHTML = '';
+        rowAlbum.innerHTML = '';
+        rowTracce.innerHTML = '';
+      for (let i = 0; i < risposta.data.length; i++) {
+        //Dati dell'album
+        console.log(risposta)
+        risposta.data[i].album.id;
+        risposta.data[i].album.title;
+        risposta.data[i].album.cover;
+        risposta.data[i].album.tracklist;
+        //Dati dell'artista
+        risposta.data[i].artist.id;
+        risposta.data[i].artist.name;
+
+      //creo elemento div e gli do una classe
+        const divAlbum = document.createElement('div');
+        divAlbum.classList.add('col-2')
+        
+//svuto l'auttuale div prima di popolarlo
+        h2Album.innerText = `${risposta.data[0].artist.name}`
+//lo popolo
+        divAlbum.innerHTML = `
+         <a href="album.html?id=${risposta.data[i].album.id}">
+         <div class="card border-0" id="album-${risposta.data[i].album.id}" style="background-color:#181818">
+             <img src="${risposta.data[i].album.cover}" class="card-img-top w-75 p-2 m-auto rounded-2" alt="${risposta.data[i].album.title}">
+             <div class="card-body">
+                 <h6 class="card-title">${risposta.data[i].album.title}</h6>
+                 <p class="card-text text-secondary">Album &middot; ${risposta.data[i].artist.name}</p>
+             </div>
+         </div>
+     </a>`
+     
+        rowAlbum.appendChild(divAlbum);
+        
+      }
+    } else {
+      console.log("Errore");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const searchBar = ricerca.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    window.location.href = `index.html?risultato=${ricerca.value}`;
+    
+    
+
+    return search();
+  }
+});

@@ -246,9 +246,21 @@ z-index: 1000000;
 
 
 
-/*---CSS ALBUM--*/
-/* 
-li:hover{
-list-style-type: none;
-background-image: ;  
-} */
+
+
+/*---PLAYER STYLE---*/
+.play-pause.bi.bi-play-fill.d-flex.justify-content-center.align-items-center{
+    padding: 10px;
+}
+
+.play-pause.bi.bi-play-fill::before{
+    scale:1.5;
+    
+}
+.play-pause.bi.bi-pause-fill::before{
+    scale:1.5;
+}
+
+.progress.bg-white:hover{
+background-color: #2d5!important;
+}
