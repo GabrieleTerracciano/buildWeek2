@@ -32,13 +32,18 @@ function togglePlayPause() {
   }
 }
 
+const songBar = document.querySelector('.song-bar')
+
 function canzoneInRiproduzione(element) {
   console.log(element)
   const canzoneInPlay = document.getElementById('title');
   const artistaInPlay = document.getElementById('artist');
+  const imgInPlay = document.getElementById('imgPlay');
   if (audio) {
+    songBar.classList.remove('d-none')
     canzoneInPlay.innerText = `${element.title}`;
-    artistaInPlay.innerText = `${element.title}`;
+    artistaInPlay.innerText = `${element.artist.name}`;
+    imgInPlay.src = `${element.album.cover_medium}`;
   }
 }
 
@@ -193,6 +198,7 @@ async function getTrack() {
     card.addEventListener("click", function (e) {
       e.preventDefault();
       if (audio) {
+        canzoneInRiproduzione()
         if (isPlaying) {
           togglePlayPause();
         }
@@ -341,6 +347,7 @@ const search = async () => {
         rowTracce.innerHTML = '';
       for (let i = 0; i < risposta.data.length; i++) {
         //Dati dell'album
+        console.log(risposta)
         risposta.data[i].album.id;
         risposta.data[i].album.title;
         risposta.data[i].album.cover;
@@ -354,7 +361,7 @@ const search = async () => {
         divAlbum.classList.add('col-2')
         
 //svuto l'auttuale div prima di popolarlo
-        h2Album.innerText = `${risposta.data[i].artist.name}`
+        h2Album.innerText = `${risposta.data[0].artist.name}`
 //lo popolo
         divAlbum.innerHTML = `
          <a href="album.html?id=${risposta.data[i].album.id}">
