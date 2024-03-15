@@ -91,12 +91,12 @@ function getDurata(time) {
 }
 
 async function getArtist() {
-    let artist = await fetch(config.fetchs.artist + id, config.options)
+    let artist = await fetch(config.fetchs.artist + id, config.options.artist)
     artist = await artist.json()
     contenitoreArtist = artist;
     artista.innerText = artist.name;
     ascolti.innerText = artist.nb_fan;
-    let tracklist = await fetch(config.proxy+artist.tracklist, config.options);
+    let tracklist = await fetch(config.proxy+artist.tracklist);
     tracklist = await tracklist.json();
     let count = 0;
     let albums = {}
@@ -145,7 +145,7 @@ async function getArtist() {
 
 async function getSongAlbum(albums) {
     for (const [key,value] of Object.entries(albums)) {
-        let album = await fetch(config.fetchs.album+key, config.options);
+        let album = await fetch(config.fetchs.album+key, config.options.album);
         album = await album.json()
         const id = album.id;
         const title =  album.title;
@@ -173,7 +173,7 @@ let libreria = document.getElementById('libreria');
 
 async function getLibrary() {
     for (const [key, value] of Object.entries(config.library)) {
-		let artista = await fetch(`${config.fetchs.artist}${key}`, config.options)
+		let artista = await fetch(`${config.fetchs.artist}${key}`, config.options.artist)
 		artista = await artista.json();
 		const div = document.createElement('div')
         div.classList.add('row', 'py-2')
@@ -200,7 +200,7 @@ async function getLibrary() {
         `
         libreria.appendChild(div)
         value.albums.forEach(async (element) => {
-            let album = await fetch(`${config.fetchs.album}${element}`, config.options)
+            let album = await fetch(`${config.fetchs.album}${element}`, config.options.album)
             album = await album.json();
             const div2 = document.createElement('div')
             div2.classList.add('row', 'py-2')

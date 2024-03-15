@@ -107,7 +107,7 @@ async function getSongAlbum() {
     id = urlParametro.get('id');
 
 
-    let album = await fetch(config.fetchs.album + id, config.options);
+    let album = await fetch(config.fetchs.album + id, config.options.album);
     album = await album.json()
     albums = album
 
@@ -201,7 +201,7 @@ let libreria = document.getElementById('libreria');
 
 async function getLibrary() {
     for (const [key, value] of Object.entries(config.library)) {
-		let artista = await fetch(`${config.fetchs.artist}${key}`, config.options)
+		let artista = await fetch(`${config.fetchs.artist}${key}`, config.options.artist)
 		artista = await artista.json();
 		const div = document.createElement('div')
         div.classList.add('row', 'py-2')
@@ -228,7 +228,7 @@ async function getLibrary() {
         `
         libreria.appendChild(div)
         value.albums.forEach(async (element) => {
-            let album = await fetch(`${config.fetchs.album}${element}`, config.options)
+            let album = await fetch(`${config.fetchs.album}${element}`, config.options.album)
             album = await album.json();
             const div2 = document.createElement('div')
             div2.classList.add('row', 'py-2')
