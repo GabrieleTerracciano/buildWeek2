@@ -1,10 +1,26 @@
 {
     "proxy": "https://corsproxy.io/?",
     "options": {
-        "headers": {
-            "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-            "X-RapidAPI-Key": "b2a4471827mshbf41dbeb51d9ca5p1dce9ejsn5eaeb2e9b73a",
-            "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin"
+        "artist": {
+            "headers": {
+                "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+                "X-RapidAPI-Key": "138e211ec9msh30a77ca1a4fa33ep122392jsne5a51611fca7",
+                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin"
+            }
+        },
+        "album": {
+            "headers": {
+                "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+                "X-RapidAPI-Key": "20a6c7f6f6msh8abdf6e44cf4079p1bf658jsnd0755dc053ed",
+                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin"
+            }
+        },
+        "search": {
+            "headers": {
+                "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+                "X-RapidAPI-Key": "795a258612mshd9818e547d03173p17e25bjsn04018e5e81ed",
+                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin"
+            }
         }
     },
     "fetchs": {

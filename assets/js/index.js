@@ -32,6 +32,16 @@ function togglePlayPause() {
   }
 }
 
+function canzoneInRiproduzione(element) {
+  console.log(element)
+  const canzoneInPlay = document.getElementById('title');
+  const artistaInPlay = document.getElementById('artist');
+  if (audio) {
+    canzoneInPlay.innerText = `${element.title}`;
+    artistaInPlay.innerText = `${element.title}`;
+  }
+}
+
 // Funzione per aggiornare l'icona del pulsante play/pausa
 function updatePlayPauseIcon() {
   playPauseButton.classList.toggle("bi-play-fill", !isPlaying);
@@ -63,7 +73,6 @@ volumeContainer.addEventListener("click", function (e) {
 function getDurata(time) {
   time = parseInt(time);
   const minuti = Math.floor(time / 60);
-  console.log(minuti);
   let secondi = time - minuti * 60;
   if (secondi >= 0 && secondi < 10) {
     secondi = "0" + secondi;
@@ -93,8 +102,8 @@ const GET = async () => {
 async function getArtist() {
   for (const [key, value] of Object.entries(config.artist)) {
     let artista = await fetch(
-      `${config.proxy}${config.fetchs.artist}${key}`,
-      config.options
+      `${config.fetchs.artist}${key}`,
+      config.options.artist
     );
     artista = await artista.json();
 
@@ -118,8 +127,8 @@ async function getAlbum() {
     
      config.home.albums.forEach(async (element) => {
     let album = await fetch(
-      `${config.proxy}${config.fetchs.album}${element}`,
-      config.options
+      `${config.fetchs.album}${element}`,
+      config.options.album
     );
     album = await album.json();
     const div = document.createElement("div");
@@ -144,25 +153,23 @@ async function getAlbum() {
 async function getTrack() {
   let ricerca =
     config.home.tracks[Math.floor(Math.random() * config.home.tracks.length)];
-  console.log(ricerca);
   let track = await fetch(
-    `${config.proxy}${config.fetchs.search}${ricerca}`,
-    config.options
+    `${config.fetchs.search}${ricerca}`,
+    config.options.search
   );
   track = await track.json();
   let count = 0;
-  track.data.forEach(async (element) => {
+  track.data.forEach(async (element, index) => {
     if (count >= 6) {
       return;
     }
     count++;
-    console.log(element);
     const div = document.createElement("div");
     div.classList.add("col-2");
     div.innerHTML = `
 		<div class="card border-0" id="search-${
       element.id
-    }" style="background-color:#181818" data-preview="${element.preview}">
+    }" style="background-color:#181818" data-preview="${element.preview}" data-index="${index}">
 			<img src="${
         element.album.cover_medium
       }" class="card-img-top w-75 p-2 m-auto rounded-2" alt="${element.title}">
@@ -174,7 +181,15 @@ async function getTrack() {
 			</div>
 		</div>`;
     rowTracce.appendChild(div);
+
+
+
+
+    
     const card = document.getElementById(`search-${element.id}`);
+
+
+    
     card.addEventListener("click", function (e) {
       e.preventDefault();
       if (audio) {
@@ -189,6 +204,7 @@ async function getTrack() {
       }
       audio = new Audio(this.getAttribute("data-preview"));
       cTime.innerText = "0:00";
+      canzoneInRiproduzione(track.data[parseInt(this.getAttribute('data-index'))])
       audio.addEventListener("timeupdate", function () {
         tTime.innerText = getDurata(this.duration);
         const progressPercent = (this.currentTime / this.duration) * 100;
@@ -205,8 +221,8 @@ let libreria = document.getElementById("libreria");
 async function getLibrary() {
   for (const [key, value] of Object.entries(config.library)) {
     let artista = await fetch(
-      `${config.proxy}${config.fetchs.artist}${key}`,
-      config.options
+      `${config.fetchs.artist}${key}`,
+      config.options.artist
     );
     artista = await artista.json();
     const div = document.createElement("div");
@@ -236,7 +252,7 @@ async function getLibrary() {
     value.albums.forEach(async (element) => {
       let album = await fetch(
         `${config.proxy}${config.fetchs.album}${element}`,
-        config.options
+        config.options.album
       );
       album = await album.json();
       const div2 = document.createElement("div");
@@ -309,7 +325,7 @@ const search = async () => {
         headers: {
           "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
           "X-RapidAPI-Key":
-            "b2a4471827mshbf41dbeb51d9ca5p1dce9ejsn5eaeb2e9b73a",
+            "795a258612mshd9818e547d03173p17e25bjsn04018e5e81ed",
           "Access-Control-Allow-Headers":
             "X-Requested-With, Content-Type, Accept, Origin",
         },
@@ -332,7 +348,6 @@ const search = async () => {
         //Dati dell'artista
         risposta.data[i].artist.id;
         risposta.data[i].artist.name;
-        console.log(risposta);
 
       //creo elemento div e gli do una classe
         const divAlbum = document.createElement('div');

@@ -238,7 +238,10 @@ z-index: 1000000;
     width: 30px;
 }
  
-
+#info-legali {
+    border-top: 1px solid grey;
+    font-size: smaller;
+}
 
 
 
