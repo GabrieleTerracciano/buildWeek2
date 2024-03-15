@@ -24,9 +24,9 @@
         }
     },
     "fetchs": {
-        "artist": "https://deezerdevs-deezer.p.rapidapi.com/artist/",
-        "album": "https://deezerdevs-deezer.p.rapidapi.com/album/",
-        "search": "https://deezerdevs-deezer.p.rapidapi.com/search?q="
+        "artist": "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/artist/",
+        "album": "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/",
+        "search": "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q="
     },
     "artist": {
         "5695": {
