@@ -327,7 +327,7 @@ async function search() {
   const valueRicerca = ricerca.value;
   try {
     const response = await fetch(
-      `https://api.deezer.com/search?q=${valueRicerca}`,
+      `https://corsproxy.io/?https://api.deezer.com/search?q=${valueRicerca}`,
       {
         method: "GET",
         headers: {

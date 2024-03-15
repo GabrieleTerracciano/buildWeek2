@@ -38,6 +38,21 @@ function togglePlayPause() {
     return
 }
 
+const songBar = document.querySelector('.song-bar')
+
+function canzoneInRiproduzione(element) {
+  console.log(element)
+  const canzoneInPlay = document.getElementById('title');
+  const artistaInPlay = document.getElementById('artist');
+  const imgInPlay = document.getElementById('imgPlay');
+  if (audio) {
+    songBar.classList.remove('d-none')
+    canzoneInPlay.innerText = `${element.title}`;
+    artistaInPlay.innerText = `${element.artist.name}`;
+    imgInPlay.src = `${element.album.cover_medium}`;
+  }
+}
+
 // Funzione per aggiornare l'icona del pulsante play/pausa
 function updatePlayPauseIcon() {
     playPauseButton.classList.toggle("bi-play-fill", !isPlaying);
@@ -170,6 +185,7 @@ for (i = 0; i < albums.tracks.data.length; i++) {
         album.addEventListener('click', function(e) {
             e.preventDefault();
             if (audio) {
+                canzoneInRiproduzione()
                 if (isPlaying) {
                     togglePlayPause();
                 }
@@ -295,7 +311,7 @@ const search = async () => {
   const valueRicerca = ricerca.value;
   try {
     const response = await fetch(
-      `https://api.deezer.com/search?q=${valueRicerca}`,
+      `https://corsproxy.io/?https://api.deezer.com/search?q=${valueRicerca}`,
       {
         method: "GET",
         headers: {
